@@ -1,0 +1,307 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --background-primary: #2e31405e;
+    --primary-text: #c7c7c7;
+}
+
+
+/* layout design */
+nav,
+main {
+    margin: 9px 19px;
+    border-radius: 10px;
+}
+
+nav {
+    background-color: var(--background-primary);
+    margin: 9px 19px;
+    padding: 8px 15px;
+    justify-content: space-between;
+}
+
+main {
+    height: calc(100dvh - 100px);
+}
+
+#chatListContainer {
+    width: 22rem;
+    min-width: 22rem;
+    min-height: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* UI */
+.appName {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: #ffffff;
+    letter-spacing: 0.4px;
+    transform: skewX(-6deg);
+}
+
+.userProfile {
+    position: relative;
+    gap: 11px;
+    margin: 4px 0px;
+    background-color: rgba(255, 255, 255, 0.04);
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 9px 15px;
+}
+
+.userFullName {
+    color: var(--primary-text);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.avatar {
+    height: 30px;
+    width: 30px;
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.isOnlineStatusGreenDot {
+    content: "";
+    position: absolute;
+    left: 36px;
+    bottom: 7px;
+    background-color: #19d919;
+    height: 11px;
+    width: 11px;
+    border-radius: 100px;
+    z-index: 100;
+}
+
+.profile-tooltip {
+    color: var(--primary-text);
+    padding: 7px 13px;
+    background-color: rgb(44, 45, 51);
+    border-radius: 7px;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+/* #chatListContainer Designs */
+#chatListContainer {
+    border-radius: 9px;
+    border: 0.5px solid #7e7c7c8e;
+}
+
+.chatListHead {
+    justify-content: space-between;
+    padding: 15px 20px 4px 20px;
+}
+
+.chats-text {
+    letter-spacing: 2px;
+    font-size: 1.59rem;
+    font-weight: 600;
+    color: rgb(206, 206, 206);
+}
+
+#addChatButton,
+#chatOptionsButton {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    margin: 0px 4px;
+    padding: 7px;
+    border-radius: 100px;
+    transition: background-color 0.4s;
+}
+
+#addChatButton:hover,
+#chatOptionsButton:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#addChatButton img {
+    height: 1.2rem;
+    width: 1.2rem;
+}
+
+#chatOptionsButton img {
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
+.chatOperationsBox {
+    position: absolute;
+    top: 150px;
+    z-index: 10000;
+    left: 320px;
+    padding: 9px;
+    height: fit-content;
+    border-radius: 9px;
+    flex-direction: column;
+    gap: 5px;
+    transform: scale(0);
+    opacity: 0;
+    transform-origin: top left;
+    transition: all 0.2s;
+    backdrop-filter: blur(100px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.8);
+}
+
+.chatOperationsButtons {
+    width: 100%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: #d4d3d3;
+    font-size: 15px;
+    padding: 5px 10px;
+    gap: 6px;
+    transition: background-color 0.2s, color 0.2s;
+    cursor: pointer;
+    border-radius: 9px;
+    font-weight: 500;
+}
+
+.chatOperationsBox ul li:last-child button {
+    /*Refers to Log out button*/
+    margin-top: 20px;
+
+}
+
+.chatOperationsBox ul li:last-child button::before {
+    content: "";
+    position: absolute;
+    bottom: 59px;
+    left: 17px;
+    height: 1px;
+    width: 82%;
+    background-color: #a5a5a5;
+}
+
+.chatOperationsBox ul li:last-child button:hover {
+    background-color: rgba(255, 0, 0, 0.137);
+    color: rgb(255, 137, 137);
+}
+
+.chatOperationsButtons:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatOperationsButtons svg {
+    height: 30px;
+    width: 30px;
+}
+
+.chatList {
+    padding: 10px;
+    height: calc(100% - 60px);
+    overflow: auto;
+    margin-right: 5px;
+    border-radius: 19px;
+}
+
+.chatList::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5px;
+}
+
+.chatList::-webkit-scrollbar-thumb {
+    width: 2px;
+    border-radius: 100px;
+    background-color: rgba(175, 175, 175, 0.651);
+}
+
+.chat {
+    margin: 2px 0px;
+    color: rgb(226, 226, 226);
+    padding: 10px;
+    border-radius: 9px;
+    gap: 10px;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.chat:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+
+}
+
+.chatInfo {
+    flex: 1;
+    justify-content: space-between;
+}
+
+.chatInfoRight {
+    flex-direction: column;
+}
+
+.chatUserAvatar {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 100px;
+}
+
+.chatUserAvatar img {
+    min-height: 3.1rem;
+    min-width: 3.1rem;
+    height: 3.1rem;
+    width: 3.1rem;
+}
+
+.chatInfoRight {
+    flex: 0.9;
+}
+.chatInfoRight>div{
+    justify-content: left;
+}
+.chatUserFullname {
+    width: 160px;
+    font-size: 0.99rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chatUserLastMessage {
+    font-size: 0.8rem;
+    color: #a5a5a5;
+    white-space: nowrap;
+    overflow: clip;
+    text-overflow: ellipsis;
+    width: 140px;
+    max-width: 140px;
+}
+.lastChatDate {
+    color: #a5a5a5;
+    font-size: 0.69rem;
+}
+.lastMessageIcons{
+    height: 20px;
+    width: 20px;
+    margin: 0px 2px;
+}
+
+/* For chat operation box opening and closing animations */
+.onclickScaleChatOperationBox {
+    transform: scale(1);
+    transform-origin: top left;
+    opacity: 1;
+}
+
+/* uploaded avatar image should be  */
+.avatar>img {
+    height: 2.0rem;
+    width: 2.0rem;
+}
+
+
+/* icons common designs */
