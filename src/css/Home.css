@@ -17,6 +17,7 @@ nav {
     background-color: var(--background-primary);
     margin: 9px 19px;
     padding: 8px 15px;
+    gap: 5px;
     justify-content: space-between;
 }
 
@@ -148,7 +149,7 @@ main {
     transition: all 0.2s;
     backdrop-filter: blur(100px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.3);
     box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.8);
 }
 
@@ -259,9 +260,11 @@ main {
 .chatInfoRight {
     flex: 0.9;
 }
-.chatInfoRight>div{
+
+.chatInfoRight>div {
     justify-content: left;
 }
+
 .chatUserFullname {
     width: 160px;
     font-size: 0.99rem;
@@ -280,18 +283,20 @@ main {
     width: 140px;
     max-width: 140px;
 }
+
 .lastChatDate {
     color: #a5a5a5;
     font-size: 0.69rem;
 }
-.lastMessageIcons{
+
+.lastMessageIcons {
     height: 20px;
     width: 20px;
     margin: 0px 2px;
 }
 
 /* For chat operation box opening and closing animations */
-.onclickScaleChatOperationBox {
+.onclickScaleOptionsContainer {
     transform: scale(1);
     transform-origin: top left;
     opacity: 1;
@@ -304,4 +309,158 @@ main {
 }
 
 
-/* icons common designs */
+/* Select chat display container */
+#chatDisplayContainer {
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+    border-radius: 9px;
+    margin: 0px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+}
+
+.selectedChatAvatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+}
+
+.selectedChatAvatar img {
+    height: 2.8rem;
+    width: 2.8rem;
+}
+
+.selectedChatUsername {
+    color: #d4d3d3;
+    font-weight: 600;
+    margin: 0px 10px;
+    cursor: pointer;
+}
+
+.chatDisplayContainerHead {
+    position: relative;
+    justify-content: space-between;
+    background: transparent;
+    margin: 0;
+    padding: 8px 15px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.selectChatOperationButtons {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin: 0px 4px;
+    height: 40px;
+    width: 40px;
+    border-radius: 9px;
+    transition: all 0.3s;
+}
+
+.selectChatOperationButtons:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.selectChatOperationButtons svg {
+    height: 25px;
+    width: 25px;
+}
+
+
+/* position: absolute;
+    top: 150px;
+    z-index: 10000;
+    left: 320px;
+    padding: 9px;
+    height: fit-content;
+    border-radius: 9px;
+    flex-direction: column;
+    gap: 5px;
+    transform: scale(0);
+    opacity: 0;
+    transform-origin: top left;
+    transition: all 0.2s;
+    backdrop-filter: blur(100px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.8); */
+/* selected chat operations dropdown */
+.selectedChatOptionDropdown {
+    position: absolute;
+    right: 30px;
+    top: 60px;
+    height: fit-content;
+    width: 200px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transform: scale(0);
+    opacity: 0;
+    transform-origin: top right;
+    transition: all 0.3s;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(80px);
+    padding: 5px 8px;
+}
+
+.onclickScaleSelectedChatOptions {
+    transform: scale(1);
+    transform-origin: top right;
+    opacity: 1;
+}
+
+.selectedChatOptionDropdown ul {
+    flex-direction: column;
+    gap: 3px;
+}
+
+.selectedChatOptionDropdown ul li {
+    gap: 6px;
+    cursor: pointer;
+    padding: 7px 10px;
+    color: rgb(196, 196, 196);
+    transition: all 0.3s;
+    border-radius: 10px;
+}
+
+.selectedChatOptionDropdown ul li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.selectedChatOptionDropdown ul li svg {
+    height: 25px;
+    width: 25px;
+}
+
+.selectedChatOptionDropdown ul li span {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.selectedChatOptionDropdown ul li:nth-child(6) {
+    margin-top: 20px;
+}
+
+.selectedChatOptionDropdown ul li:nth-child(6)::before {
+    content: "";
+    height: 1px;
+    width: 90%;
+    position: absolute;
+    bottom: 180px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.selectedChatOptionDropdown ul li:nth-child(6):hover,
+.selectedChatOptionDropdown ul li:nth-child(7):hover,
+.selectedChatOptionDropdown ul li:nth-child(8):hover,
+.selectedChatOptionDropdown ul li:nth-child(9):hover {
+    background-color: rgba(255, 0, 0, 0.137);
+    color: rgb(255, 137, 137);
+}
+
+/* chat input box design */

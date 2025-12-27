@@ -1,38 +1,42 @@
 import "../../css/App.css";
 import "../../css/utilities.css";
 import "../../css/Home.css";
-
-import { useRef } from "react";
-import Tippy from "@tippyjs/react";
-import { Icon } from "@iconify/react";
 import "tippy.js/animations/scale.css";
+
+import Tippy from "@tippyjs/react";
+import { useRef } from "react";
+import { Icon } from "@iconify/react";
 
 // ! Pending Tasks :-
 // ? if the user name is to big then give it a ... at the end
 // ? if the recent chat user name is to big then give it a ... at the end
 // ? create a dropdown for every recent chats 
 
+
+// TODO:- START BY POPULATING CHAT OPTIONS CONTAINER
+
 function Home() {
     // useRef(s)
     let chatOperationsBox = useRef(null);
+    let selectedChatOptionDropDown = useRef(null);
 
     // animations and page loader functions
     function loadProfilePage() {
         console.log("Loaded profile page")
     }
-    function showChatOperationsOptions(chatOperationsBox) {
-        chatOperationsBox = chatOperationsBox.current;
+    function scaleContainer(targetContainerReference, classNameToBeAdded) {
+        let container = targetContainerReference.current;
 
-        if (chatOperationsBox.classList.contains("onclickScaleChatOperationBox")) {
-            chatOperationsBox.classList.remove("onclickScaleChatOperationBox");
+        if (container.classList.contains(`${classNameToBeAdded}`)) {
+            container.classList.remove(`${classNameToBeAdded}`);
         } else {
-            chatOperationsBox.classList.add("onclickScaleChatOperationBox");
+            container.classList.add(`${classNameToBeAdded}`);
         }
     }
 
     return (
         <>
-            <nav className="alignCenter">
+            <nav className="alignCenter chatAppHead">
                 <div className="favicon alignCenter">
                     <div className="logo">
                         <p className="appName">Chat App</p>
@@ -44,6 +48,7 @@ function Home() {
                     animation="scale"
                     duration={[250, 180]}
                     className="profile-tooltip"
+                    placement="left"
 
                 >
                     <div onClick={loadProfilePage} className="userProfile alignCenter">
@@ -57,7 +62,7 @@ function Home() {
                     </div>
                 </Tippy>
             </nav>
-            <main>
+            <main className="flex">
                 <aside id="chatListContainer">
                     <div className="chatListHead alignCenter">
                         <p className="chats-text">Chats</p>
@@ -74,7 +79,7 @@ function Home() {
                             <button
                                 className="center"
                                 id="chatOptionsButton"
-                                onClick={() => showChatOperationsOptions(chatOperationsBox)}
+                                onClick={() => scaleContainer(chatOperationsBox, "onclickScaleOptionsContainer")}
                             >
                                 <img src="src/assets/more.png" loading="lazy" alt="Error!" />
                             </button>
@@ -140,11 +145,43 @@ function Home() {
                                     </div>
                                 </div>
                                 <div className="chatInfoLeft">
-                                    <span className="lastChatDate">27/09/2025</span> {/*Format :- DD/MM/YYYY */}
+                                    <span className="lastChatDate">12/01/2025</span> {/*Format :- DD/MM/YYYY */}
                                 </div>
                             </div>
                         </li>
                     </ul>
+                </aside>
+                <aside id="chatDisplayContainer">
+                    <nav className="chatDisplayContainerHead alignCenter">
+                        <div className="alignCenter">
+                            <div className="selectedChatAvatar center">
+                                <img src="src/assets/avatar.webp" loading="lazy" alt="Error..." />
+                            </div>
+                            <p className="selectedChatUsername">Kartikey Dost</p>
+                        </div>
+                        <div className="alignCenter">
+                            <button className="selectChatOperationButtons center"><Icon icon="mdi:video" style={{ color: "#f8f2f2" }}></Icon></button>
+                            <button className="selectChatOperationButtons center"><Icon icon="mdi:phone" style={{ color: "#f8f2f2" }}></Icon></button>
+                            <button className="selectChatOperationButtons center"><Icon icon="mdi:search" style={{ color: "#f8f2f2" }}></Icon></button>
+                            <button onClick={() => scaleContainer(selectedChatOptionDropDown, "onclickScaleSelectedChatOptions")} className="selectChatOperationButtons center"><Icon icon="mdi:more-vert" style={{ color: "#f8f2f2" }}></Icon></button>
+                            <div
+                                ref={selectedChatOptionDropDown}
+                                className="selectedChatOptionDropdown"
+                            >
+                                <ul className="flex">
+                                    <li className="alignCenter"><Icon icon="ci:info"></Icon><span>Contact info</span></li>
+                                    <li className="alignCenter"><Icon icon="fluent:select-all-on-20-regular"></Icon><span>Select messages</span></li>
+                                    <li className="alignCenter"><Icon icon="basil:notification-off-outline"></Icon><span>Mute user</span></li>
+                                    <li className="alignCenter"><Icon icon="icon-park-outline:like"></Icon><span>Add to favourites</span></li>
+                                    <li className="alignCenter"><Icon icon="fontisto:close"></Icon><span>Close chat</span></li>
+                                    <li className="alignCenter"><Icon icon="tabler:message-report"></Icon><span>Report</span></li>
+                                    <li className="alignCenter"><Icon icon="solar:user-block-bold"></Icon><span>Block user</span></li>
+                                    <li className="alignCenter"><Icon icon="bx:message-alt-minus"></Icon><span>Clear chat</span></li>
+                                    <li className="alignCenter"><Icon icon="mingcute:delete-line"></Icon><span>Delete chat</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
                 </aside>
             </main>
         </>
