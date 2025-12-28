@@ -19,8 +19,13 @@ function Home() {
     // useRef(s)
     let chatOperationsBox = useRef(null);
     let selectedChatOptionDropDown = useRef(null);
+    let chatTextAreaReference = useRef(null);
 
     // animations and page loader functions
+    function growTextArea(target) {
+        target.style.height = "auto";
+        target.style.height = target.scrollHeight + "px";
+    }
     function loadProfilePage() {
         console.log("Loaded profile page")
     }
@@ -182,6 +187,17 @@ function Home() {
                             </div>
                         </div>
                     </nav>
+                    <main className="currentChatDisplay"></main>
+                    <div className="chatInputBox alignCenter">
+                        <button className="center chatInputButton addAttachmentsButton"><Icon icon="mdi:plus"></Icon></button>
+                        <textarea
+                            onInput={(e) => growTextArea(e.target)}
+                            ref={chatTextAreaReference}
+                            rows="1"
+                            placeholder="Type something..."
+                            id="chatInput"></textarea>
+                        <button className="center chatInputButton voiceChatInput"><Icon icon="mdi:microphone-outline"></Icon></button>
+                    </div>
                 </aside>
             </main>
         </>

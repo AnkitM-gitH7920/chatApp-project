@@ -150,7 +150,7 @@ main {
     backdrop-filter: blur(100px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     background-color: rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
 .chatOperationsButtons {
@@ -311,6 +311,7 @@ main {
 
 /* Select chat display container */
 #chatDisplayContainer {
+    position: relative;
     width: 100%;
     overflow: hidden;
     height: 100%;
@@ -369,26 +370,6 @@ main {
     height: 25px;
     width: 25px;
 }
-
-
-/* position: absolute;
-    top: 150px;
-    z-index: 10000;
-    left: 320px;
-    padding: 9px;
-    height: fit-content;
-    border-radius: 9px;
-    flex-direction: column;
-    gap: 5px;
-    transform: scale(0);
-    opacity: 0;
-    transform-origin: top left;
-    transition: all 0.2s;
-    backdrop-filter: blur(100px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background-color: rgba(0, 0, 0, 0.4);
-    box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.8); */
-/* selected chat operations dropdown */
 .selectedChatOptionDropdown {
     position: absolute;
     right: 30px;
@@ -405,6 +386,7 @@ main {
     background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(80px);
     padding: 5px 8px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
 .onclickScaleSelectedChatOptions {
@@ -464,3 +446,50 @@ main {
 }
 
 /* chat input box design */
+.chatInputBox{
+    position: absolute;
+    justify-content: space-between;
+    left: calc(100% - 98%);
+    bottom: 2%;
+    width: 96%;
+    height: fit-content;
+    border-radius: 20px;
+    padding: 5px 0px;
+    box-shadow: 0px 0px 5px rgba(171, 130, 247, 0.4);
+}
+.chatInputButton{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: #dfdfdf;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 17px;
+    padding: 5px;
+    margin: 0px 6px;
+}
+.chatInputButton:hover{
+    background-color: rgba(255, 255, 255, 0.06);
+}
+.classRotateAddSvg{
+    transform: rotate(135deg);
+}
+.chatInputButton svg{
+    transition: transform 0.4s;
+    height: 30px;
+    width: 30px;
+}
+#chatInput{
+    overflow-x: hidden;
+    overflow-y: auto;
+    resize: none;
+    word-break: break-word;
+    white-space: pre-wrap;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 0.92rem;
+    width: 100% !important;
+    color: white;
+    text-wrap: wrap;
+}
