@@ -191,6 +191,7 @@ function Home() {
                     <div className="chatInputBox alignCenter">
                         <button className="center chatInputButton addAttachmentsButton"><Icon icon="mdi:plus"></Icon></button>
                         <textarea
+                            className="alignCenter"
                             onInput={(e) => growTextArea(e.target)}
                             ref={chatTextAreaReference}
                             rows="1"

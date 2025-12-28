@@ -318,6 +318,10 @@ main {
     border-radius: 9px;
     margin: 0px 10px;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    background: url("src/assets/chat-background.png");
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 
 }
 
@@ -348,6 +352,7 @@ main {
     margin: 0;
     padding: 8px 15px;
     background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(60px);
 }
 
 .selectChatOperationButtons {
@@ -370,6 +375,7 @@ main {
     height: 25px;
     width: 25px;
 }
+
 .selectedChatOptionDropdown {
     position: absolute;
     right: 30px;
@@ -383,8 +389,8 @@ main {
     transform-origin: top right;
     transition: all 0.3s;
     z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(80px);
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(100px);
     padding: 5px 8px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
@@ -446,18 +452,21 @@ main {
 }
 
 /* chat input box design */
-.chatInputBox{
+.chatInputBox {
     position: absolute;
     justify-content: space-between;
     left: calc(100% - 98%);
     bottom: 2%;
     width: 96%;
     height: fit-content;
+    align-items: flex-end;
     border-radius: 20px;
     padding: 5px 0px;
     box-shadow: 0px 0px 5px rgba(171, 130, 247, 0.4);
+    backdrop-filter: blur(60px);
 }
-.chatInputButton{
+
+.chatInputButton {
     background-color: transparent;
     outline: none;
     border: none;
@@ -467,20 +476,27 @@ main {
     border-radius: 17px;
     padding: 5px;
     margin: 0px 6px;
+    flex: 0 0 auto;
+    align-self: flex-end
 }
-.chatInputButton:hover{
+.chatInputButton:hover {
     background-color: rgba(255, 255, 255, 0.06);
 }
-.classRotateAddSvg{
+
+.classRotateAddSvg {
     transform: rotate(135deg);
 }
-.chatInputButton svg{
+
+.chatInputButton svg {
     transition: transform 0.4s;
     height: 30px;
     width: 30px;
 }
-#chatInput{
-    overflow-x: hidden;
+
+#chatInput {
+    flex: 1;
+    min-height: 40px;
+    max-height: 120px;
     overflow-y: auto;
     resize: none;
     word-break: break-word;
@@ -489,7 +505,16 @@ main {
     border: none;
     outline: none;
     font-size: 0.92rem;
-    width: 100% !important;
     color: white;
-    text-wrap: wrap;
+    padding: 8px 6px;
+}
+#chatInput::-webkit-scrollbar {
+    background-color: transparent;
+    cursor: pointer;
+    width: 5px;
+}
+#chatInput::-webkit-scrollbar-thumb {
+    width: 2px;
+    border-radius: 100px;
+    background-color: rgba(175, 175, 175, 0.651);
 }
