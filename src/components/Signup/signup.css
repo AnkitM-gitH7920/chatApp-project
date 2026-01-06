@@ -1,0 +1,16 @@
+.signupBody{
+    min-height: 100vh;
+    min-width: 100vw;
+    background: url("/login-signup-back.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.signupWrapper{
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    height: fit-content;
+    width: fit-content;
+    border-radius: 10px;
+
+}

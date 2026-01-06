@@ -4,22 +4,25 @@ import "../../css/Home.css";
 import "tippy.js/animations/scale.css";
 
 import Tippy from "@tippyjs/react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
+import { createPortal } from "react-dom";
 
 // ! Pending Tasks :-
 // ? if the user name is to big then give it a ... at the end
 // ? if the recent chat user name is to big then give it a ... at the end
-// ? create a dropdown for every recent chats 
 
-
-// TODO:- START BY POPULATING CHAT OPTIONS CONTAINER
 
 function Home() {
+    // useState(s)
+    let [enteredChatMessage, setEnteredChatMessage] = useState("");
+
+
     // useRef(s)
     let chatOperationsBox = useRef(null);
     let selectedChatOptionDropDown = useRef(null);
-    let chatTextAreaReference = useRef(null);
+    let addAttachmentSvgReference = useRef(null);
+    let addAttachmentsBoxReference = useRef(null);
 
     // animations and page loader functions
     function growTextArea(target) {
@@ -28,6 +31,18 @@ function Home() {
     }
     function loadProfilePage() {
         console.log("Loaded profile page")
+    }
+    function scaleAddAttachmentBox() {
+        let Svg = addAttachmentSvgReference.current;
+        let Box = addAttachmentsBoxReference.current;
+
+        if (Svg.classList.contains("classRotateAddSvg") && Box.classList.contains("scaleAddAttachmentBox")) {
+            Svg.classList.remove("classRotateAddSvg");
+            Box.classList.remove("scaleAddAttachmentBox");
+        } else {
+            Svg.classList.add("classRotateAddSvg");
+            Box.classList.add("scaleAddAttachmentBox")
+        }
     }
     function scaleContainer(targetContainerReference, classNameToBeAdded) {
         let container = targetContainerReference.current;
@@ -169,35 +184,60 @@ function Home() {
                             <button className="selectChatOperationButtons center"><Icon icon="mdi:phone" style={{ color: "#f8f2f2" }}></Icon></button>
                             <button className="selectChatOperationButtons center"><Icon icon="mdi:search" style={{ color: "#f8f2f2" }}></Icon></button>
                             <button onClick={() => scaleContainer(selectedChatOptionDropDown, "onclickScaleSelectedChatOptions")} className="selectChatOperationButtons center"><Icon icon="mdi:more-vert" style={{ color: "#f8f2f2" }}></Icon></button>
-                            <div
-                                ref={selectedChatOptionDropDown}
-                                className="selectedChatOptionDropdown"
-                            >
-                                <ul className="flex">
-                                    <li className="alignCenter"><Icon icon="ci:info"></Icon><span>Contact info</span></li>
-                                    <li className="alignCenter"><Icon icon="fluent:select-all-on-20-regular"></Icon><span>Select messages</span></li>
-                                    <li className="alignCenter"><Icon icon="basil:notification-off-outline"></Icon><span>Mute user</span></li>
-                                    <li className="alignCenter"><Icon icon="icon-park-outline:like"></Icon><span>Add to favourites</span></li>
-                                    <li className="alignCenter"><Icon icon="fontisto:close"></Icon><span>Close chat</span></li>
-                                    <li className="alignCenter"><Icon icon="tabler:message-report"></Icon><span>Report</span></li>
-                                    <li className="alignCenter"><Icon icon="solar:user-block-bold"></Icon><span>Block user</span></li>
-                                    <li className="alignCenter"><Icon icon="bx:message-alt-minus"></Icon><span>Clear chat</span></li>
-                                    <li className="alignCenter"><Icon icon="mingcute:delete-line"></Icon><span>Delete chat</span></li>
-                                </ul>
-                            </div>
+                            {createPortal(
+                                <div
+                                    ref={selectedChatOptionDropDown}
+                                    className="selectedChatOptionDropdown"
+                                >
+                                    <ul className="flex">
+                                        <li className="alignCenter"><Icon icon="ci:info"></Icon><span>Contact info</span></li>
+                                        <li className="alignCenter"><Icon icon="fluent:select-all-on-20-regular"></Icon><span>Select messages</span></li>
+                                        <li className="alignCenter"><Icon icon="basil:notification-off-outline"></Icon><span>Mute user</span></li>
+                                        <li className="alignCenter"><Icon icon="icon-park-outline:like"></Icon><span>Add to favourites</span></li>
+                                        <li className="alignCenter"><Icon icon="fontisto:close"></Icon><span>Close chat</span></li>
+                                        <li className="alignCenter"><Icon icon="tabler:message-report"></Icon><span>Report</span></li>
+                                        <li className="alignCenter"><Icon icon="solar:user-block-bold"></Icon><span>Block user</span></li>
+                                        <li className="alignCenter"><Icon icon="bx:message-alt-minus"></Icon><span>Clear chat</span></li>
+                                        <li className="alignCenter"><Icon icon="mingcute:delete-line"></Icon><span>Delete chat</span></li>
+                                    </ul>
+                                </div>,
+                                document.body
+                            )}
                         </div>
                     </nav>
-                    <main className="currentChatDisplay"></main>
+                    <main className="currentChatDisplay flex">
+                        {/* <p className="secondPerson">Hello</p> <-- dummy divs(to be injected by javascript)
+                        <p className="firstPerson">hello...</p> */}
+                        <p className="secondPerson">Hello ankit</p>
+                        <p className="firstPerson">han bhai...</p>
+                    </main>
                     <div className="chatInputBox alignCenter">
-                        <button className="center chatInputButton addAttachmentsButton"><Icon icon="mdi:plus"></Icon></button>
+                        <button
+                            onClick={scaleAddAttachmentBox}
+                            className="center chatInputButton addAttachmentsButton">
+                            <Icon ref={addAttachmentSvgReference} icon="mdi:plus"></Icon>
+                        </button>
                         <textarea
+                            onChange={(e) => setEnteredChatMessage(e.target.value)}
                             className="alignCenter"
                             onInput={(e) => growTextArea(e.target)}
-                            ref={chatTextAreaReference}
                             rows="1"
                             placeholder="Type something..."
                             id="chatInput"></textarea>
-                        <button className="center chatInputButton voiceChatInput"><Icon icon="mdi:microphone-outline"></Icon></button>
+                        <button className="center chatInputButton voiceChatInput">
+                            <Icon icon="mdi:microphone-outline"></Icon>
+                        </button>
+                        <div
+                            ref={addAttachmentsBoxReference}
+                            className="attachmentOptionBox">
+                            <ul className="flex">
+                                <li className="alignCenter"><Icon icon="mdi:file-document-add"></Icon><span>Add Files</span></li>
+                                <li className="alignCenter"><Icon icon="mdi:images"></Icon><span>Photos & videos</span></li>
+                                <li className="alignCenter"><Icon icon="mdi:audio"></Icon><span>Audio file</span></li>
+                                <li className="alignCenter"><Icon icon="mdi:camera"></Icon><span>Camera</span></li>
+                                <li className="alignCenter"><Icon icon="mdi:contact"></Icon><span>Contacts</span></li>
+                            </ul>
+                        </div>
                     </div>
                 </aside>
             </main>

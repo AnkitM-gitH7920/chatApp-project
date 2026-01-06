@@ -313,15 +313,15 @@ main {
 #chatDisplayContainer {
     position: relative;
     width: 100%;
-    overflow: hidden;
     height: 100%;
     border-radius: 9px;
     margin: 0px 10px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     background: url("src/assets/chat-background.png");
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: scroll;
     background-repeat: no-repeat;
+    background-size: cover;
 
 }
 
@@ -378,8 +378,8 @@ main {
 
 .selectedChatOptionDropdown {
     position: absolute;
-    right: 30px;
-    top: 60px;
+    right: 55px;
+    top: 150px;
     height: fit-content;
     width: 200px;
     border-radius: 10px;
@@ -388,7 +388,7 @@ main {
     opacity: 0;
     transform-origin: top right;
     transition: all 0.3s;
-    z-index: 1000;
+    z-index: 999999;
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(100px);
     padding: 5px 8px;
@@ -475,16 +475,13 @@ main {
     transition: all 0.3s;
     border-radius: 17px;
     padding: 5px;
-    margin: 0px 6px;
+    margin: 0px 5px;
     flex: 0 0 auto;
     align-self: flex-end
 }
+
 .chatInputButton:hover {
     background-color: rgba(255, 255, 255, 0.06);
-}
-
-.classRotateAddSvg {
-    transform: rotate(135deg);
 }
 
 .chatInputButton svg {
@@ -508,13 +505,161 @@ main {
     color: white;
     padding: 8px 6px;
 }
+
 #chatInput::-webkit-scrollbar {
     background-color: transparent;
     cursor: pointer;
     width: 5px;
 }
+
 #chatInput::-webkit-scrollbar-thumb {
     width: 2px;
     border-radius: 100px;
     background-color: rgba(175, 175, 175, 0.651);
+}
+
+/* Chat documents attachments options container */
+.attachmentOptionBox {
+    padding: 9px;
+    background-color: rgba(0, 0, 0, 1.0);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    height: fit-content;
+    position: absolute;
+    left: 0px;
+    bottom: 55px;
+    z-index: 1000;
+    border-radius: 10px;
+    transition: opacity 0.3s 0.1s, transform 0.3s cubic-bezier(0, 0, 0.84, 1.11);
+    transform: scale(0);
+    opacity: 0;
+    transform-origin: bottom left;
+}
+
+.attachmentOptionBox ul {
+    flex-direction: column;
+    gap: 4px;
+}
+
+.attachmentOptionBox ul li {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 9px;
+    gap: 7px;
+    transition: all 0.3s;
+
+}
+
+.attachmentOptionBox ul li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.attachmentOptionBox ul li svg {
+    height: 20px;
+    width: 20px;
+}
+
+.attachmentOptionBox ul li:nth-child(1) {
+    color: #5CC8FF;
+}
+
+.attachmentOptionBox ul li:nth-child(2) {
+    color: #F5B942;
+}
+
+.attachmentOptionBox ul li:nth-child(3) {
+    color: #B18CFF;
+}
+
+.attachmentOptionBox ul li:nth-child(4) {
+    color: #FF6FB1;
+}
+
+.attachmentOptionBox ul li:nth-child(5) {
+    color: #FF7A7A;
+}
+
+.attachmentOptionBox ul li span {
+    font-weight: 500;
+    font-size: 0.94rem;
+    color: #d4d4d4;
+}
+
+.classRotateAddSvg {
+    transform: rotate(135deg);
+}
+
+.scaleAddAttachmentBox {
+    transform: scale(1);
+    opacity: 1;
+    transform-origin: bottom left;
+}
+
+/* Current chat display */
+.currentChatDisplay {
+    height: calc(100% - 135px);
+    gap: 10px;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 5px 10px;
+    flex-direction: column;
+    transition: all 0.3s
+}
+
+.currentChatDisplay::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5px;
+
+}
+
+.currentChatDisplay::-webkit-scrollbar-thumb {
+    width: 2px;
+    border-radius: 100px;
+    background-color: rgba(205, 239, 255, 0.082);
+}
+
+.secondPerson,
+.firstPerson {
+    position: relative;
+    max-width: 60%;
+    z-index:0;
+    width: fit-content;
+    height: fit-content;
+    padding: 12px;
+    color: rgba(255, 255, 255, 0.637);
+    backdrop-filter: blur(20px);
+    font-size: 0.92rem;
+    font-weight: 500;
+    word-wrap: break-word;
+    word-break: break-all;
+    word-spacing: normal;
+    text-align: left;
+    box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.2);
+}
+
+.secondPerson {
+    border-radius: 0px 12px 12px 12px;
+    background-color: rgba(0, 0, 0, 0.01);
+    ;
+}
+
+.firstPerson {
+    background: linear-gradient(135deg,
+            rgba(123, 92, 255, 0.9),
+            rgba(88, 74, 214, 0.95));
+    border-radius: 12px 0px 12px 12px;
+    align-self: flex-end;
+}
+.secondPerson>div,
+.firstPerson>div{
+    position: absolute;
+}
+.secondPerson>div>p,
+.firstPerson>div>p{
+    color: rgba(255, 255, 255, 0.5)
+
+}
+.firstPerson>div>img{
+    height: 15px;
+    width: 15px;
 }
