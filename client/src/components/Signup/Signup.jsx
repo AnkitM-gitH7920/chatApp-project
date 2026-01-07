@@ -7,7 +7,9 @@ import "../../css/App.css";
 function Signup(){
     return(
         <div className="signupBody center">
-            <div className="signupWrapper"></div>
+            <div className="signupWrapper">
+                <p>Let us know you :)</p>
+            </div>
         </div>
     )
 }
