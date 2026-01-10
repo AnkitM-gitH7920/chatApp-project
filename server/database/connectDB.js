@@ -4,7 +4,7 @@ const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING;
 
 async function connectToRegisteredUsersDB(){
     try {
-        const connectionInstance = await mongoose.connect(`${DB_CONNECTION_STRING}`);
+        const connectionInstance = await mongoose.connect(`${DB_CONNECTION_STRING}/users`);
         console.log("DB connected successfully || PORT: " + connectionInstance.connection.port);
         
     } catch (error) {

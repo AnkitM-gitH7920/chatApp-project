@@ -3,7 +3,7 @@ import app from "./app.js";
 import connectToRegisteredUsersDB from "./database/connectDB.js";
 
 
-const PORT = process.env.SERVER_PORT || 8000;
+const PORT = process.env.SERVER_PORT || 8080;
 
 connectToRegisteredUsersDB().
     then((response) => {
