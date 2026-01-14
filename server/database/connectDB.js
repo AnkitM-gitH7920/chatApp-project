@@ -8,7 +8,7 @@ async function connectToRegisteredUsersDB(){
         console.log("DB connected successfully || PORT: " + connectionInstance.connection.port);
         
     } catch (error) {
-        console.log("Error connecting to registeredUsers database!!!")
+        console.log("Error connecting to registeredUsers database!!!");
     }
 }
 

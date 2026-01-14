@@ -6,19 +6,18 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        lowerCase: true, // can throw an error
+        lowercase: true,
         trim: true,
         unique: true
     },
     password: {
         type: String,
         required: true,
-        trim: true,
     },
     loggedInOn: {
         type: Date,
-        required: true,
-        default: Date.now
+        required: false,
+        default: null
     },
     loggedOffOn: {
         type: Date,
@@ -28,31 +27,45 @@ const userSchema = new mongoose.Schema({
     refreshToken: {
         type: String,
         required: false,
-        trim: true,
+        default: null
     }
-}, { timestamps: true })
+}, { timestamps: true });
+
+userSchema.pre("save", async function () {
+    if (this.isModified("password")) {
+        this.password = await bcrypt.hash(this.password, 10);
+        return;
+    }
+
+    return;
+})
+
+userSchema.methods.compareEncryptedPassword = async function (password) {
+    const compareResult = await bcrypt.compare(password, this.password);
+    return compareResult;
+}
+
+userSchema.methods.generateAccessToken = function () {
+    return jwt.sign({
+        userID: this._id,
+        email: this.email,
+        purpose: "ACCESS",
+        isVerified: true
+    }, process.env.JWT_ACCESSTOKEN_SECRET,
+        { expiresIn: "15m" }
+    )
+}
+userSchema.methods.generateRefreshToken = function () {
+    return jwt.sign({
+        userID: this._id,
+        purpose: "ACCESS",
+        isVerified: true
+    }, process.env.JWT_REFRESHTOKEN_SECRET,
+        { expiresIn: "30d" }
+    )
+}
+
 
 let User = mongoose.model("user", userSchema);
-
-userSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) return next();
-
-    const salt = bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(password, 10);
-    next();
-});
-
-userSchema.methods.generateAccessToken = function(){
-    return jwt.sign({
-        id: this._id
-    }, process.env.JWT_ACCESSTOKEN_SECRET, 
-    { expiresIn: "15m" }
-)}
-userSchema.methods.generateRefreshToken = function(){
-    return jwt.sign({
-        id: this._id
-    }, process.env.JWT_ACCESSTOKEN_SECRET, 
-    { expiresIn: "20d" }
-)}
 
 export default User;
