@@ -21,7 +21,7 @@ const verifyJWTToRequestOTP = asyncHandler(async (req, res, next) => {
             if (err.name === "TokenExpiredError") {
                 return res
                     .status(401)
-                    .json(new APIError(401, "Your session has expired. Please log in again to request a new OTP"))
+                    .json(new APIError(401, "Your session has expired. Please log in again to request a new OTP", "TEMPORARY_TOKEN_EXPIRED"))
             }
             if (err.name === "JsonWebTokenError") {
                 return res

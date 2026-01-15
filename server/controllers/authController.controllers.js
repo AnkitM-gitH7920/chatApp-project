@@ -1,3 +1,6 @@
+import crypto from "crypto";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 import User from "../models/users.models.js";
 import OtpStorage from "../models/otpStorage.model.js";
 import asyncHandler from "../utilities/asyncHandler.js";
@@ -7,9 +10,6 @@ import { validationResult } from "express-validator";
 import generalPasswordFormatSchema from "../utilities/passwordValidator.js";
 import generateAccessAndRefreshTokens from "../utilities/genAccessAndRefToken.js";
 import { sendHtmlMail } from "../utilities/sendMails.js";
-import crypto from "crypto";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
 
 const convertOTPToString = (enteredOTP) => {
   return typeof (enteredOTP) === "string" ? enteredOTP : enteredOTP.toString();
@@ -321,6 +321,34 @@ const verifyOTP = asyncHandler(async (req, res) => {
       secure: true
     })
     .json(new APIResponse(true, 200, "User logged in successfully"));
+});
+
+// @To securely logout user from the website
+const logoutUser = asyncHandler(async (req, res) => {
+  let { passwordEntered } = req.body;
+  let decodedData = req.decodedAccessTokenData;
+  if (!passwordEntered) {
+    return res
+      .status(400)
+      .json(new APIError(400, "Password is required!!!"));
+  }
+  if(!generalPasswordFormatSchema.validate(passwordEntered)){
+    return res
+    .status(400)
+    .json(new APIError(400, "Password is weak, enter a strong password"));
+  }
+  if(!decodedData){
+    return res
+    .status(400)
+    .json(new APIError(500, "Something went wrong while verifying user, please try again later"));
+  }
+
+
+
+  if (!accessToken || !refreshToken) {
+    return res
+      .status()
+  }
 })
 
 export {

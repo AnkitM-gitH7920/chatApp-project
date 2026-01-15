@@ -1,8 +1,8 @@
-import asyncHandler from "../utilities/asyncHandler";
 import jwt from "jsonwebtoken";
-import APIError from "../utilities/APIError";
-import User from "../models/users.models";
-import APIResponse from "../utilities/APIResponse";
+import asyncHandler from "../utilities/asyncHandler.js";
+import APIError from "../utilities/APIError.js";
+import User from "../models/users.models.js";
+import APIResponse from "../utilities/APIResponse.js";
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
     let refreshToken = req.cookies?.refreshToken;
@@ -54,10 +54,10 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     let newAccessToken;
     try {
         let storedUser = await User.findById(decodedData.userID);
-        if (!storedUser || !storedUser.refreshToken === refreshToken) {
+        if (!storedUser || storedUser.refreshToken !== refreshToken) {
             return res
                 .status(401)
-                .json(new APIError(401, "Your session has been expired, please login again to use the resource"));
+                .json(new APIError(401, "Your session has been expired, please login again to use this resource"));
         }
 
         newAccessToken = jwt.sign(
